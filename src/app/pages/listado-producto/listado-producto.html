@@ -1,0 +1,66 @@
+<div class="container mt-2">
+    <h2>Gestión de Productos</h2>
+    <hr>
+    <button class="btn btn-primary" (click)="openNewProducto()">Nuevo</button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripción</th>
+                <th>Marca</th>
+                <th>Categoría</th>
+                <th class="text-end pe-5">Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+             @for (producto of productos().content; track $index; let i = $index) {
+                <tr>
+                   <td>{{ (productos().number * productos().size) + i + 1 }}</td>
+                    <td>{{ producto.descripcion }}</td>
+                    <td>{{ producto.marcaDescripcion }}</td>
+                    <td>{{ producto.categoriaDescripcion }}</td>
+                    <td class="text-end pe-5">{{ producto.precioUnitario | number:'1.2-2' }}</td>
+                    <td>
+                        <button class="btn btn-secondary me-2"
+                                title="Ver"
+                                (click)="openViewProducto(producto.id)">
+                            <i class="bi bi-eye"></i>
+                        </button>
+
+                        <button class="btn btn-warning me-2"
+                                title="Editar"
+                                (click)="openEditProducto(producto.id)">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+
+                        <button class="btn btn-danger"
+                                title="Eliminar"
+                                (click)="removeProducto(producto.id)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+
+    <li class="page-item" [class.disabled]="productos().number === 0">
+      <button class="page-link" (click)="loadProductos(1)"><<</button>
+    </li>
+
+    @for(i of ranges(productos().totalPages); track i) {
+      <li class="page-item" [class.active]="productos().number === i - 1">
+        <button class="page-link" (click)="loadProductos(i)">{{ i }}</button>
+      </li>
+    }
+
+    <li class="page-item" [class.disabled]="productos().number === productos().totalPages - 1">
+      <button class="page-link" (click)="loadProductos(productos().totalPages)">>></button>
+    </li>
+
+  </ul>
+</nav>
+</div>

@@ -1,0 +1,52 @@
+<div class="container-fluid p-0">
+    <div class="row m-0">
+        <div class="col-12 p-0 bg-success bg-gradient">
+            <div class="d-flex align-items-center p-3 px-4 text-white">
+                <div class="bg-white bg-opacity-25 rounded p-3 me-3">
+                </div>
+                <div>
+                    <h1 class="h2 mb-1 fw-bold">Agro Tanpu</h1>
+                    <p class="mb-0 small opacity-75">Sistema de Gestión Agrícola</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-0">
+        <div class="col-md-3 col-lg-2 p-0 sidebar-green shadow-sm">
+            <nav class="p-3">
+                <h6 class="text-uppercase text-success fw-bold mb-3 px-2 small opacity-75">Gestión</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="/listado-cargo" class="d-flex align-items-center text-decoration-none text-dark p-3 rounded bg-white menu-hover">
+                            <i class="bi bi-briefcase-fill fs-5 me-3 text-success"></i>
+                            <span class="fw-semibold">Cargos</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/listado-categoria" class="d-flex align-items-center text-decoration-none text-dark p-3 rounded bg-white menu-hover">
+                            <i class="bi bi-folder-fill fs-5 me-3 text-success"></i>
+                            <span class="fw-semibold">Categorías</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/listado-producto" class="d-flex align-items-center text-decoration-none text-dark p-3 rounded bg-white menu-hover">
+                            <i class="bi bi-basket-fill fs-5 me-3 text-success"></i>
+                            <span class="fw-semibold">Productos</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/listado-empleado" class="d-flex align-items-center text-decoration-none text-dark p-3 rounded bg-white menu-hover">
+                            <i class="bi bi-people-fill fs-5 me-3 text-success"></i>
+                            <span class="fw-semibold">Empleados</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="col-md-9 col-lg-10 bg-light p-4">
+            <router-outlet />
+        </div>
+    </div>
+</div>

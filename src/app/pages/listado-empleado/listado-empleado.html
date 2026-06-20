@@ -1,0 +1,74 @@
+<div class="container mt-2">
+    <h2>Gestión de Empleados</h2>
+    <hr>
+
+    <button class="btn btn-primary" (click)="openNewEmpleado()">Nuevo</button>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre Completo</th>
+                <th>Usuario</th>
+                <th>Rol</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (empleado of empleados().content; track $index) {
+                <tr>
+                    <td>{{ empleado.id }}</td>
+                    <td>{{ empleado.nombreCompleto }}</td>
+                    <td>{{ empleado.usuario }}</td>
+                    <td>{{ empleado.rolDescripcion }}</td>
+                    <td>{{ empleado.estado ? 'Activo' : 'Inactivo' }}</td>
+                    <td>
+                        <button class="btn btn-secondary me-2"
+                                title="Ver"
+                                (click)="openViewEmpleado(empleado.id)">
+                            <i class="bi bi-eye"></i>
+                        </button>
+
+                        <button class="btn btn-warning me-2"
+                                title="Editar"
+                                (click)="openEditEmpleado(empleado.id)">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+
+                        <button class="btn btn-danger"
+                                title="Eliminar"
+                                (click)="removeEmpleado(empleado.id)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item">
+                <button class="page-link" (click)="loadEmpleados(1)"><<</button>
+            </li>
+
+            @for(i of ranges(empleados().page.totalPages); track i) {
+                <li class="page-item">
+                    <button class="page-link"
+                            (click)="loadEmpleados(i)">
+                        {{ i }}
+                    </button>
+                </li>
+            }
+
+            <li class="page-item">
+                <button class="page-link"
+                        (click)="loadEmpleados(empleados().page.totalPages)">
+                    >>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>

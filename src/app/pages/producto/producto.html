@@ -1,0 +1,109 @@
+<div class="container mt-5">
+    <h1>{{ title() }}</h1>
+    <hr>
+
+    <form (ngSubmit)="save()" class="row g-3" #productoForm="ngForm" novalidate>
+
+        <div class="col-md-12">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" class="form-control"
+                   [disabled]="type == 'V'"
+                   [ngModel]="producto().descripcion"
+                   (ngModelChange)="updateProducto('descripcion', $event)"
+                   name="descripcion"
+                   id="descripcion"
+                   required
+                   minlength="3"
+                   #descripcion="ngModel"
+                   [ngClass]="{'is-invalid': descripcion.invalid && descripcion.touched}">
+            <div class="invalid-feedback" *ngIf="descripcion.invalid && descripcion.touched">
+                La descripción es requerida.
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="marca" class="form-label">Marca</label>
+            <select class="form-select"
+                    [disabled]="type == 'V'"
+                    [ngModel]="producto().idMarca"
+                    (ngModelChange)="updateProducto('idMarca', $event)"
+                    name="idMarca"
+                    id="marca"
+                    required
+                    #idMarca="ngModel"
+                    [ngClass]="{'is-invalid': idMarca.invalid && idMarca.touched}">
+                <option [ngValue]="null">Seleccione una marca</option>
+                <option *ngFor="let m of marcas()" [ngValue]="m.id">
+                    {{ m.descripcion }}
+                </option>
+            </select>
+            <div class="invalid-feedback" *ngIf="idMarca.invalid && idMarca.touched">
+                Debe seleccionar una marca.
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="categoria" class="form-label">Categoría</label>
+            <select class="form-select"
+                    [disabled]="type == 'V'"
+                    [ngModel]="producto().idCategoria"
+                    (ngModelChange)="updateProducto('idCategoria', $event)"
+                    name="idCategoria"
+                    id="categoria"
+                    required
+                    #idCategoria="ngModel"
+                    [ngClass]="{'is-invalid': idCategoria.invalid && idCategoria.touched}">
+                <option [ngValue]="null">Seleccione una categoría</option>
+                <option *ngFor="let c of categorias()" [ngValue]="c.id">
+                    {{ c.descripcion }}
+                </option>
+            </select>
+            <div class="invalid-feedback" *ngIf="idCategoria.invalid && idCategoria.touched">
+                Debe seleccionar una categoría.
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="precioUnitario" class="form-label">Precio Unitario</label>
+            <input type="number" class="form-control"
+                   [disabled]="type == 'V'"
+                   [ngModel]="producto().precioUnitario"
+                   (ngModelChange)="updateProducto('precioUnitario', $event)"
+                   name="precioUnitario"
+                   id="precioUnitario"
+                   required
+                   min="0.01"
+                   step="0.01"
+                   #precioUnitario="ngModel"
+                   [ngClass]="{'is-invalid': precioUnitario.invalid && precioUnitario.touched}">
+            <div class="invalid-feedback" *ngIf="precioUnitario.invalid && precioUnitario.touched">
+                El precio es requerido y debe ser mayor a 0.
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="stock" class="form-label">Stock</label>
+            <input type="number" class="form-control"
+                   [disabled]="type == 'V'"
+                   [ngModel]="producto().stock"
+                   (ngModelChange)="updateProducto('stock', $event)"
+                   name="stock"
+                   id="stock"
+                   required
+                   min="0"
+                   #stock="ngModel"
+                   [ngClass]="{'is-invalid': stock.invalid && stock.touched}">
+            <div class="invalid-feedback" *ngIf="stock.invalid && stock.touched">
+                El stock es requerido y debe ser mayor o igual a 0.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary me-2" [disabled]="type == 'V'">
+                Guardar
+            </button>
+            <a class="btn btn-secondary" href="/listado-producto">Cancelar</a>
+        </div>
+
+    </form>
+</div>

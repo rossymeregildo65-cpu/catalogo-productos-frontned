@@ -1,0 +1,89 @@
+<div class="container mt-5">
+  <h1>{{ title }}</h1>
+  <hr>
+
+  <form (ngSubmit)="save()" class="row g-3">
+
+    <div class="col-md-6">
+      <label class="form-label">Nombres</label>
+      <input type="text"
+             class="form-control"
+             [disabled]="type == 'V'"
+             [(ngModel)]="empleado.nombres"
+             name="nombres">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Apellidos</label>
+      <input type="text"
+             class="form-control"
+             [disabled]="type == 'V'"
+             [(ngModel)]="empleado.apellidos"
+             name="apellidos">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Usuario</label>
+      <input type="text"
+             class="form-control"
+             [disabled]="type == 'V'"
+             [(ngModel)]="empleado.usuario"
+             name="usuario">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Contraseña</label>
+      <input type="password"
+             class="form-control"
+             [disabled]="type == 'V'"
+             [(ngModel)]="empleado.contrasenia"
+             name="contrasenia"
+             placeholder="Dejar vacío para no cambiar">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Rol</label>
+      <select class="form-select"
+              [disabled]="type == 'V'"
+              [(ngModel)]="empleado.idRol"
+              name="idRol">
+        <option value="">-- Seleccione Rol --</option>
+
+        @for (rol of roles; track $index) {
+          <option [ngValue]="rol.id">
+            {{ rol.descripcion }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Puesto</label>
+      <select class="form-select"
+              [disabled]="type == 'V'"
+              [(ngModel)]="empleado.idCargo"
+              name="idCargo">
+        <option value="">-- Seleccione Puesto --</option>
+
+        @for (cargo of cargos; track $index) {
+          <option [ngValue]="cargo.id">
+            {{ cargo.descripcion }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <div class="col-12">
+      <button type="submit"
+              class="btn btn-primary me-2"
+              [disabled]="type == 'V'">
+        Guardar
+      </button>
+
+      <a class="btn btn-secondary" href="/listado-empleado">
+        Cancelar
+      </a>
+    </div>
+
+  </form>
+</div>

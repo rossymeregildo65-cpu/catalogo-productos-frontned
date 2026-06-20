@@ -1,0 +1,47 @@
+<div class="container mt-5">
+    <h1>
+        <div>{{title()}}</div>
+    </h1>
+    <hr>
+    <form (ngSubmit)="save()" class="row g-3" method="post" #cargoForm="ngForm" novalidate>       
+        <div class="col-md-12">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" class="form-control" [disabled]="type == 'V'" [(ngModel)]="cargo().descripcion" name="descripcion" id="descripcion" required minlength="3"#descripcion="ngModel" 
+            [ngClass]="{'is-invalid': descripcion.invalid && descripcion.touched}">
+
+        <div class="invalid-feedback" *ngIf="descripcion.errors && descripcion.touched">
+            <div *ngIf="descripcion.errors['required']">
+            La descripción es obligatoria
+            </div>
+            <div *ngIf="descripcion.errors['minlength']">
+            Mínimo 3 caracteres
+            </div>
+        </div>
+
+        </div>
+
+        <div class="col-6">
+            <label for="estado" class="form-label">Estado</label>
+            <select
+                id="estado"
+                class="form-select"
+                [disabled]="type == 'V'"
+                [(ngModel)]="cargo().estado"
+                name="estado"
+                #estado="ngModel" required [ngClass]="{'is-invalid': estado.invalid && estado.touched}">
+    
+                <option [ngValue]="true">Activo</option>
+                <option [ngValue]="false">Inactivo</option>
+
+            </select>
+            <div class="invalid-feedback">
+                Debe seleccionar un estado
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary me-2" [disabled]="type == 'V'|| cargoForm.invalid">Guardar</button>
+            <a class="btn btn-secondary" href="/listado-cargo">Cancelar</a>
+        </div>
+    </form>
+</div>

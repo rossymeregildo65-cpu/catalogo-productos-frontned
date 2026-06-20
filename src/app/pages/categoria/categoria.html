@@ -1,0 +1,35 @@
+<div class="container mt-5">
+    <h1>
+        <div>{{title()}}</div>
+    </h1>
+    <hr>
+    <form (ngSubmit)="save()" class="row g-3" method="post" #categoriaForm="ngForm" novalidate>       
+        <div class="col-md-12">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" class="form-control" [disabled]="type == 'V'" [(ngModel)]="categoria().descripcion" name="descripcion" id="descripcion"
+            required
+            minlength="3"#descripcion="ngModel" 
+            [ngClass]="{'is-invalid': descripcion.invalid && descripcion.touched}">
+        </div>
+
+        <div class="col-6">
+            <label for="estado" class="form-label">Estado</label>
+            <select
+                id="estado"
+                class="form-select"
+                [disabled]="type == 'V'"
+                [(ngModel)]="categoria().estado"
+                name="estado">
+
+                <option [ngValue]="true">Activo</option>
+                <option [ngValue]="false">Inactivo</option>
+
+            </select>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary me-2" [disabled]="type == 'V' || categoriaForm.invalid ">Guardar</button>
+            <a class="btn btn-secondary" href="/listado-categoria">Cancelar</a>
+        </div>
+    </form>
+</div>
