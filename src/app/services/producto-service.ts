@@ -9,7 +9,7 @@ import { ProductoPageDto } from '../dto/producto-page-dto';
 })
 export class ProductoService {
   
-private readonly baseUrl: string = 'http://localhost:8083/api/productos';
+private readonly baseUrl: string = 'http://localhost:8081/api/productos';
 
   constructor(private http: HttpClient) {}
 

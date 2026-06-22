@@ -1,0 +1,66 @@
+<div class="container mt-2">
+    <h2>Gestión de Marcas</h2>
+    <hr>
+
+<button class="btn btn-primary me-2" (click)="openNewMarca()">Nuevo</button>
+<button class="btn btn-success me-2" (click)="verActivos()">Activos</button>
+<button class="btn btn-secondary" (click)="verInactivos()">Inactivos</button>
+
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (marca of marcas().content; track $index) {
+                <tr>
+                    <td>{{ marca.id }}</td>
+                    <td>{{ marca.descripcion }}</td>
+                    <td>{{ marca.estado ? 'Activo' : 'Inactivo' }}</td>
+                    <td>
+                        <button class="btn btn-secondary me-2"
+                                title="Ver"
+                                (click)="openViewMarca(marca.id)">
+                            <i class="bi bi-eye"></i>
+                        </button>
+
+                        <button class="btn btn-warning me-2"
+                                title="Editar"
+                                (click)="openEditMarca(marca.id)">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+
+                        <button class="btn btn-danger"
+                                title="Eliminar"
+                                (click)="removeMarca(marca.id)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination justify-content-end">
+            <li class="page-item">
+                <button class="page-link" (click)="loadMarcas(1)"><<</button>
+            </li>
+
+            @for(i of ranges(marcas().totalPages); track i) {
+                <li class="page-item" [class.active]="marcas().number === i - 1">
+                    <button class="page-link" (click)="loadMarcas(i)">{{ i }}</button>
+                </li>
+            }
+
+            <li class="page-item">
+                <button class="page-link" (click)="loadMarcas(marcas().totalPages)">>></button>
+            </li>
+        </ul>
+    </nav>
+</div>
